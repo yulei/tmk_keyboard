@@ -257,6 +257,6 @@ endif
 
 RULESPATH = $(CHIBIOS)/os/common/ports/ARMCMx/compilers/GCC
 ifeq ("$(wildcard $(RULESPATH)/rules.mk)","")
-RULESPATH = $(CHIBIOS)/os/common/startup/ARMCMx/compilers/GCC/mk
+RULESPATH = $(CHIBIOS)/os/common/startup/ARMCMx/compilers/GCC
 endif
 include $(RULESPATH)/rules.mk
