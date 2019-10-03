@@ -46,7 +46,7 @@ ifdef COMMAND_ENABLE
     OPT_DEFS += -DCOMMAND_ENABLE
 endif
 
-ifdef NKRO_ENABLE
+ifeq (yes,$(strip $(NKRO_ENABLE)))
     OPT_DEFS += -DNKRO_ENABLE
 endif
 
