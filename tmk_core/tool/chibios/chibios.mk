@@ -145,7 +145,8 @@ CSRC = $(STARTUPSRC) \
        $(LIBSRC) \
        $(TMK_DIR)/protocol/chibios/usb_main.c \
        $(TMK_DIR)/protocol/chibios/main.c \
-       $(SRC)
+       $(SRC) \
+       $(CHIBIOS)/os/various/syscalls.c
 
 # C++ sources that can be compiled in ARM or THUMB mode depending on the global
 # setting.

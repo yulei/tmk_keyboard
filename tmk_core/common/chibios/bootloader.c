@@ -6,7 +6,7 @@
 #ifdef STM32_BOOTLOADER_ADDRESS
 /* STM32 */
 
-#if defined(STM32F0XX)
+#if defined(STM32F0XX) || defined(STM32F4XX)
 /* This code should be checked whether it runs correctly on platforms */
 #define SYMVAL(sym) (uint32_t)(((uint8_t *)&(sym)) - ((uint8_t *)0))
 extern uint32_t __ram0_end__;
