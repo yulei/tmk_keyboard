@@ -38,7 +38,15 @@ void action_macro_play(const macro_t *macro_p)
 
     if (!macro_p) return;
     while (true) {
-        switch (MACRO_READ()) {
+        MACRO_READ();
+        if (macro>=0x04 && macro<=0x73) {
+            dprintf("DOWN(%02X)\n", macro);
+            register_code(macro);
+        } else if (macro>=0x84 && macro<=0xF3) {
+            dprintf("DOWN(%02X)\n", macro);
+            unregister_code(macro&0x7F);
+        } else {
+        switch (macro) {
             case KEY_DOWN:
                 MACRO_READ();
                 dprintf("KEY_DOWN(%02X)\n", macro);
@@ -79,17 +87,18 @@ void action_macro_play(const macro_t *macro_p)
                 clear_mods();
                 send_keyboard_report();
                 break;
-            case 0x04 ... 0x73:
+            /*case 0x04 ... 0x73:
                 dprintf("DOWN(%02X)\n", macro);
                 register_code(macro);
                 break;
             case 0x84 ... 0xF3:
                 dprintf("UP(%02X)\n", macro);
                 unregister_code(macro&0x7F);
-                break;
+                break;*/
             case END:
             default:
                 return;
+        }
         }
         // interval
         { uint8_t ms = interval; while (ms--) wait_ms(1); }

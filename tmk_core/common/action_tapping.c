@@ -21,8 +21,8 @@
 #define WITHIN_TAPPING_TERM(e)  (TIMER_DIFF_16(e.time, tapping_key.event.time) < TAPPING_TERM)
 
 
-static keyrecord_t tapping_key = {};
-static keyrecord_t waiting_buffer[WAITING_BUFFER_SIZE] = {};
+static keyrecord_t tapping_key;// = {};
+static keyrecord_t waiting_buffer[WAITING_BUFFER_SIZE];// = {};
 static uint8_t waiting_buffer_head = 0;
 static uint8_t waiting_buffer_tail = 0;
 
@@ -47,7 +47,7 @@ void action_tapping_process(keyrecord_t record)
             debug("OVERFLOW: CLEAR ALL STATES\n");
             clear_keyboard();
             waiting_buffer_clear();
-            tapping_key = (keyrecord_t){};
+            tapping_key = (keyrecord_t){.event ={.pressed=false}};
         }
     }
 
@@ -185,7 +185,7 @@ bool process_tapping(keyrecord_t *keyp)
                 debug("Tapping: End. Timeout. Not tap(0): ");
                 debug_event(event); debug("\n");
                 process_action(&tapping_key);
-                tapping_key = (keyrecord_t){};
+                tapping_key = (keyrecord_t){.event={.pressed=false}};
                 debug_tapping_key();
                 return false;
             }  else {
@@ -193,7 +193,7 @@ bool process_tapping(keyrecord_t *keyp)
                     debug("Tapping: End. last timeout tap release(>0).");
                     keyp->tap = tapping_key.tap;
                     process_action(keyp);
-                    tapping_key = (keyrecord_t){};
+                    tapping_key = (keyrecord_t){.event={.pressed=false}};
                     return true;
                 }
                 else if (is_tap_key(event) && event.pressed) {
@@ -265,7 +265,7 @@ bool process_tapping(keyrecord_t *keyp)
             // timeout. no sequential tap.
             debug("Tapping: End(Timeout after releasing last tap): ");
             debug_event(event); debug("\n");
-            tapping_key = (keyrecord_t){};
+            tapping_key = (keyrecord_t){.event={.pressed=false}};
             debug_tapping_key();
             return false;
         }

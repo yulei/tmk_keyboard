@@ -144,7 +144,7 @@ static uint8_t current_layer_for_key(keypos_t key)
 
 #ifndef NO_TRACK_KEY_PRESS
 /* record layer on where key is pressed */
-static uint8_t layer_pressed[MATRIX_ROWS][MATRIX_COLS] = {};
+static uint8_t layer_pressed[MATRIX_ROWS][MATRIX_COLS];// = {};
 #endif
 action_t layer_switch_get_action(keyevent_t event)
 {

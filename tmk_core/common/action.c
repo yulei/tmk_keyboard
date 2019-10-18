@@ -249,9 +249,22 @@ void process_action(keyrecord_t *record)
     #ifndef NO_ACTION_TAPPING
         case ACT_LAYER_TAP:
         case ACT_LAYER_TAP_EXT:
+          if ((action.layer_tap.code >= 0xc0) && (action.layer_tap.code <= 0xdf)) {
+               if (event.pressed) {
+                        layer_on(action.layer_tap.val);
+                        register_mods((action.layer_tap.code & 0x10) ?
+                                (action.layer_tap.code & 0x0f) << 4 :
+                                (action.layer_tap.code & 0x0f));
+                    } else {
+                        layer_off(action.layer_tap.val);
+                        unregister_mods((action.layer_tap.code & 0x10) ?
+                                (action.layer_tap.code & 0x0f) << 4 :
+                                (action.layer_tap.code & 0x0f));
+                    }
+          }else {
             switch (action.layer_tap.code) {
-                case 0xc0 ... 0xdf:
-                    /* layer On/Off with modifiers */
+            /*    case 0xc0 ... 0xdf:
+                    // layer On/Off with modifiers
                     if (event.pressed) {
                         layer_on(action.layer_tap.val);
                         register_mods((action.layer_tap.code & 0x10) ?
@@ -263,7 +276,7 @@ void process_action(keyrecord_t *record)
                                 (action.layer_tap.code & 0x0f) << 4 :
                                 (action.layer_tap.code & 0x0f));
                     }
-                    break;
+                    break;*/
                 case OP_TAP_TOGGLE:
                     /* tap toggle */
                     if (event.pressed) {
@@ -309,6 +322,7 @@ void process_action(keyrecord_t *record)
                     }
                     break;
             }
+          }
             break;
     #endif
 #endif
@@ -556,20 +570,25 @@ bool is_tap_key(keyevent_t event)
     switch (action.kind.id) {
         case ACT_LMODS_TAP:
         case ACT_RMODS_TAP:
+            if (action.key.code>=KC_A && action.key.code<=KC_EXSEL) return true;
+            if (action.key.code>=KC_LCTRL && action.key.code<=KC_RGUI) return true;
             switch (action.key.code) {
                 case MODS_ONESHOT:
                 case MODS_TAP_TOGGLE:
-                case KC_A ... KC_EXSEL:                 // tap key
-                case KC_LCTRL ... KC_RGUI:              // tap key
+                //case KC_A ... KC_EXSEL:                 // tap key
+                //case KC_LCTRL ... KC_RGUI:              // tap key
                     return true;
             }
         case ACT_LAYER_TAP:
         case ACT_LAYER_TAP_EXT:
+            if (action.layer_tap.code>=0xc0 && action.layer_tap.code<=0xdf) return false;
+            if (action.key.code>=KC_A && action.key.code<=KC_EXSEL) return true;
+            if (action.key.code>=KC_LCTRL && action.key.code<=KC_RGUI) return true;
             switch (action.layer_tap.code) {
-                case 0xc0 ... 0xdf:         // with modifiers
-                    return false;
-                case KC_A ... KC_EXSEL:     // tap key
-                case KC_LCTRL ... KC_RGUI:  // tap key
+                //case 0xc0 ... 0xdf:         // with modifiers
+                //    return false;
+                //case KC_A ... KC_EXSEL:     // tap key
+                //case KC_LCTRL ... KC_RGUI:  // tap key
                 case OP_TAP_TOGGLE:
                     return true;
             }

@@ -42,7 +42,7 @@ static int8_t cb_count = 0;
 
 // TODO: pointer variable is not needed
 //report_keyboard_t keyboard_report = {};
-report_keyboard_t *keyboard_report = &(report_keyboard_t){};
+report_keyboard_t *keyboard_report = &(report_keyboard_t){.mods=0};
 
 #ifndef NO_ACTION_ONESHOT
 static int8_t oneshot_mods = 0;
