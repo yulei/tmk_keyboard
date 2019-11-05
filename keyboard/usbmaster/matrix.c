@@ -26,120 +26,130 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "util.h"
 #include "matrix.h"
 #include "wait.h"
+#include "host.h"
+#include "report.h"
 
-#ifndef DEBOUNCE
-#   define DEBOUNCE 5
-#endif
-static uint8_t debouncing = DEBOUNCE;
+#include <string.h>
 
-/* matrix state(1:on, 0:off) */
-static matrix_row_t matrix[MATRIX_ROWS];
-static matrix_row_t matrix_debouncing[MATRIX_ROWS];
+// uart configuration
+#define UART_READY_PORT GPIOB
+#define UART_READY_PIN 0
+#define UART_BUF_SIZE 64
 
-static matrix_row_t read_cols(void);
-static void init_cols(void);
-static void unselect_rows(void);
-static void select_row(uint8_t row);
-
-
-inline
-uint8_t matrix_rows(void)
+static uint32_t uart_recv_size = 0;
+static bool uart_data_ready = false;
+static uint8_t uart_recv_buf[UART_BUF_SIZE];
+/*
+ * This callback is invoked when a transmission buffer has been completely
+ * read by the driver.
+ */
+static void txend(UARTDriver *uartp)
 {
-    return MATRIX_ROWS;
+    (void)uartp;
 }
 
-inline
-uint8_t matrix_cols(void)
+/*
+ * This callback is invoked on a receive error, the errors mask is passed
+ * as parameter.
+ */
+static void rxerr(UARTDriver *uartp, uartflags_t e)
 {
-    return MATRIX_COLS;
+    (void)uartp;
+    (void)e;
 }
 
+/*
+ * This callback is invoked when a character is received but the application
+ * was not ready to receive it, the character is passed as parameter.
+ */
+static void rxchar(UARTDriver *uartp, uint16_t c)
+{
+    uart_recv_size = c;
+    chSysLockFromISR();
+    uartStartReceiveI(uartp, uart_recv_size - 1, &uart_recv_buf[0]);
+    chSysUnlockFromISR();
+}
+
+/*
+ * This callback is invoked when a receive buffer has been completely written.
+ */
+static void rxend(UARTDriver *uartp)
+{
+    (void)uartp;
+
+    // clear receivable signal
+    palClearPad(UART_READY_PORT, UART_READY_PIN);
+    uart_data_ready = true;
+}
+
+static UARTConfig uart_cfg = {
+    txend,
+    NULL,
+    rxend,
+    rxchar,
+    rxerr,
+    115200,
+    0,
+    0,
+    0};
+
+// tmk hooking
 void matrix_init(void)
 {
-    // initialize row and col
-    unselect_rows();
-    init_cols();
-
-    // initialize matrix state: all keys off
-    for (uint8_t i=0; i < MATRIX_ROWS; i++) {
-        matrix[i] = 0;
-        matrix_debouncing[i] = 0;
-    }
-
-    //debug
-    debug_matrix = true;
-    wait_ms(500);
+    palSetPadMode(UART_READY_PORT, UART_READY_PIN, PAL_MODE_OUTPUT_PUSHPULL);
+    uartStart(&UARTD3, &uart_cfg);
+    palSetPad(UART_READY_PORT, UART_READY_PIN);
 }
+
+extern host_driver_t chibios_driver;
 
 uint8_t matrix_scan(void)
 {
-    for (uint8_t i = 0; i < MATRIX_ROWS; i++) {
-        select_row(i);
-        wait_us(30);  // without this wait read unstable value.
-        matrix_row_t cols = read_cols();
-        if (matrix_debouncing[i] != cols) {
-            matrix_debouncing[i] = cols;
-            if (debouncing) {
-                debug("bounce!: "); debug_hex(debouncing); debug("\n");
-            }
-            debouncing = DEBOUNCE;
+    if (uart_data_ready)
+    {
+        switch (uart_recv_buf[0])
+        {
+        case 1: //key
+        {
+            report_keyboard_t report;
+            memcpy(&report, &uart_recv_buf[1], sizeof(report));
+            chibios_driver.send_keyboard(&report);
         }
-        unselect_rows();
-    }
-
-    if (debouncing) {
-        if (--debouncing) {
-            wait_ms(1);
-        } else {
-            for (uint8_t i = 0; i < MATRIX_ROWS; i++) {
-                matrix[i] = matrix_debouncing[i];
+        break;
+        case 2: // cc
+        {
+            uint16_t key;
+            memcpy(&key, &uart_recv_buf[1], sizeof(key));
+            if (IS_SYSTEM(key))
+            {
+                chibios_driver.send_system(key);
+            }
+            else
+            {
+                chibios_driver.send_consumer(key);
             }
         }
+        break;
+        case 3: // mouse
+        {
+            report_mouse_t report;
+            memcpy(&report, &uart_recv_buf[1], sizeof(report));
+            chibios_driver.send_mouse(&report);
+        }
+        break;
+        }
+        uart_data_ready = false;
+        palSetPad(UART_READY_PORT, UART_READY_PIN);
     }
-
     return 1;
 }
 
-inline
-bool matrix_is_on(uint8_t row, uint8_t col)
-{
-    return (matrix[row] & ((matrix_row_t)1<<col));
-}
-
-inline
 matrix_row_t matrix_get_row(uint8_t row)
 {
-    return matrix[row];
+    (void)row;
+    return 0;
 }
 
 void matrix_print(void)
 {
-    print("\nr/c 0123456789ABCDEF\n");
-    for (uint8_t row = 0; row < MATRIX_ROWS; row++) {
-        phex(row); print(": ");
-        pbin_reverse16(matrix_get_row(row));
-        print("\n");
-    }
-}
-
-/* Column pin configuration
- */
-static void  init_cols(void)
-{
-}
-
-/* Returns status of switches(1:on, 0:off) */
-static matrix_row_t read_cols(void)
-{
-}
-
-/* Row pin configuration
- */
-static void unselect_rows(void)
-{
-}
-
-static void select_row(uint8_t row)
-{
-    (void)row;
 }
