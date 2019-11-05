@@ -85,7 +85,7 @@
  * Everything input with pull-up except:
  */
 #define VAL_GPIOACRL 0x88888888 /*  PA7...PA0 */
-#define VAL_GPIOACRH 0x88888888 /* PA15...PA8 */
+#define VAL_GPIOACRH 0x88844888 /* PA15...PA8 */
 #define VAL_GPIOAODR 0xFFFFFFFF
 
 /*
@@ -93,7 +93,7 @@
  * Everything input with pull-up except:
  */
 #define VAL_GPIOBCRL 0x88888888 /*  PB7...PB0 */
-#define VAL_GPIOBCRH 0x88888888 /* PB15...PB8 */
+#define VAL_GPIOBCRH 0x88884B88 /* PB15...PB8 */
 #define VAL_GPIOBODR 0xFFFFFFFF
 
 /*
@@ -137,7 +137,7 @@
 /*
 #define usb_lld_connect_bus(usbp) palClearPad(GPIOB, GPIOB_USB_DISC)
 */
-#define usb_lld_connect_bus(usbp) palSetPadMode(GPIOA, 12, PAL_MODE_INPUT);
+#define usb_lld_connect_bus(usbp) //palSetPadMode(GPIOA, 12, PAL_MODE_INPUT);
 
 /*
  * USB bus de-activation macro, required by the USB driver.
@@ -145,9 +145,7 @@
 /*
 #define usb_lld_disconnect_bus(usbp) palSetPad(GPIOB, GPIOB_USB_DISC)
 */
-#define usb_lld_disconnect_bus(usbp)                    \
-    palSetPadMode(GPIOA, 12, PAL_MODE_OUTPUT_PUSHPULL); \
-    palClearPad(GPIOA, 12);
+#define usb_lld_disconnect_bus(usbp) //palSetPadMode(GPIOA, 12, PAL_MODE_OUTPUT_PUSHPULL);  palClearPad(GPIOA, 12);
 
 #if !defined(_FROM_ASM_)
 #ifdef __cplusplus
