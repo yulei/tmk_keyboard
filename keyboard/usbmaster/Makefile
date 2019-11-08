@@ -9,13 +9,8 @@ TARGET_DIR = .
 
 # project specific files
 SRC =	matrix.c \
+			keymap_plain.c \
 	    led.c
-
-ifdef KEYMAP
-    SRC := keymap_$(KEYMAP).c $(SRC)
-else
-    SRC := keymap_plain.c $(SRC)
-endif
 
 CONFIG_H = config.h
 
