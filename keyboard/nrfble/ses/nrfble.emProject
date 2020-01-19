@@ -45,7 +45,6 @@
       <file file_name="../../../tmk_core/tool/nrf52/nRF5_SDK_16.0.0_98a08e2/components/libraries/log/src/nrf_log_str_formatter.c" />
     </folder>
     <folder Name="nRF_Libraries">
-      <file file_name="../../../tmk_core/tool/nrf52/nRF5_SDK_16.0.0_98a08e2/components/libraries/button/app_button.c" />
       <file file_name="../../../tmk_core/tool/nrf52/nRF5_SDK_16.0.0_98a08e2/components/libraries/util/app_error.c" />
       <file file_name="../../../tmk_core/tool/nrf52/nRF5_SDK_16.0.0_98a08e2/components/libraries/util/app_error_handler_gcc.c" />
       <file file_name="../../../tmk_core/tool/nrf52/nRF5_SDK_16.0.0_98a08e2/components/libraries/util/app_error_weak.c" />
@@ -122,6 +121,17 @@
         <file file_name="../../../tmk_core/common/keymap.c" />
         <file file_name="../../../tmk_core/common/bootmagic.c" />
       </folder>
+      <folder Name="ble">
+        <file file_name="../ble/ble_adv_service.c" />
+        <file file_name="../ble/ble_adv_service.h" />
+        <file file_name="../ble/ble_bat_service.c" />
+        <file file_name="../ble/ble_bat_service.h" />
+        <file file_name="../ble/ble_hid_descriptor.h" />
+        <file file_name="../ble/ble_hid_service.c" />
+        <file file_name="../ble/ble_hid_service.h" />
+        <file file_name="../ble/ble_services.c" />
+        <file file_name="../ble/ble_services.h" />
+      </folder>
     </folder>
     <folder Name="nRF_Segger_RTT">
       <file file_name="../../../tmk_core/tool/nrf52/nRF5_SDK_16.0.0_98a08e2/external/segger_rtt/SEGGER_RTT.c" />
@@ -171,8 +181,13 @@
       Name="Debug"
       c_additional_options=""
       c_only_additional_options=""
-      c_preprocessor_definitions="PROTOCOL_NRF;CUSTOM_BOARD;MATRIX_COLS=14;MATRIX_ROWS=5;BOOTMAGIC_ENABLE"
-      c_user_include_directories="../porting;../../../tmk_core/common;../../../tmk_core/protocol" />
+      c_preprocessor_definitions="PROTOCOL_NRF;CUSTOM_BOARD;MATRIX_COLS=14;MATRIX_ROWS=5;BOOTMAGIC_ENABLE;WITH_LUFA=1;CONFIG_JLINK_MONITOR_ENABLED=1"
+      c_user_include_directories="../porting;../ble;../../../tmk_core/common;../../../tmk_core/protocol;../../../tmk_core/protocol/lufa/LUFA-git/" />
+    <folder Name="Segger MMD">
+      <file file_name="../mmd/JLINK_MONITOR.c" />
+      <file file_name="../mmd/JLINK_MONITOR.h" />
+      <file file_name="../mmd/JLINK_MONITOR_ISR_SES.s" />
+    </folder>
   </project>
   <configuration
     Name="Release"

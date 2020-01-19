@@ -3,7 +3,7 @@
  */
 
 #include "ble_keyboard.h"
-//#include "ble_hid_service.h"
+#include "ble_hid_service.h"
 #include "app_timer.h"
 #include "report.h"
 #include "host.h"
@@ -65,10 +65,9 @@ uint8_t keyboard_leds(void) {
     return keyboard_led_val;
 }
 
-extern void ble_hid_service_send_report(uint8_t report_id, uint8_t* report_data);
-
-void send_keyboard(report_keyboard_t *report) {
-    ble_hid_service_send_report(1, report->raw);
+static void send_keyboard(report_keyboard_t *report)
+{
+    ble_hid_service_send_report(NRF_REPORT_ID_KEYBOARD, &(report->raw[0]));
 }
 
 #ifdef MOUSEKEY_ENABLE
