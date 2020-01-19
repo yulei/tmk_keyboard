@@ -7,22 +7,7 @@
 #include "ble_config.h"
 #if WITH_LUFA
 #define ATTR_PACKED __attribute__((packed))
-/** Concatenates the given input into a single token, via the C Preprocessor.
- *
- *  \param[in] x  First item to concatenate.
- *  \param[in] y  Second item to concatenate.
- *
- *  \return Concatenated version of the input.
- */
 #define CONCAT(x, y) x##y
-
-/** CConcatenates the given input into a single token after macro expansion, via the C Preprocessor.
- *
- *  \param[in] x  First item to concatenate.
- *  \param[in] y  Second item to concatenate.
- *
- *  \return Concatenated version of the expanded input.
- */
 #define CONCAT_EXPANDED(x, y) CONCAT(x, y)
 #define CPU_TO_LE16(x) (x)
 

@@ -179,6 +179,7 @@
       c_user_include_directories="../porting;./../../tmk_core/common;../../../tmk_core/protocol" />
     <configuration
       Name="Debug"
+      build_intermediate_directory="Output/$(Configuration)/Obj"
       c_additional_options=""
       c_only_additional_options=""
       c_preprocessor_definitions="PROTOCOL_NRF;CUSTOM_BOARD;MATRIX_COLS=14;MATRIX_ROWS=5;BOOTMAGIC_ENABLE;WITH_LUFA=1;CONFIG_JLINK_MONITOR_ENABLED=1"
