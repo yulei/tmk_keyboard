@@ -55,14 +55,8 @@ void ble_keyboard_start(void)
 
 }
 
-static uint8_t keyboard_led_val = 0;
-void ble_keyboard_set_led(uint8_t led)
-{
-    keyboard_led_val = led;
-}
-
 uint8_t keyboard_leds(void) {
-    return keyboard_led_val;
+    return ble_driver.keyboard_led;
 }
 
 static void send_keyboard(report_keyboard_t *report)

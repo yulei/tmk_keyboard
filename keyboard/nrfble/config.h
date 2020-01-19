@@ -13,8 +13,13 @@
 #define DESCRIPTION     60% rgb keyboard with ble extension
 
 /* key matrix size */
-//#define MATRIX_ROWS 5
-//#define MATRIX_COLS 14
+#ifndef MATRIX_ROWS
+  #define MATRIX_ROWS 5
+#endif
+
+#ifndef MATRIX_COLS
+  #define MATRIX_COLS 14
+#endif
 #define UNUSED_PINS
 #define DIODE_DIRECTION COL2ROW
 #define MATRIX_ROW_PINS { 3,  2, 31, 30, 29}

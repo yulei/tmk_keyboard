@@ -48,8 +48,11 @@
 #include "ble_adv_service.h"
 #include "ble_hid_service.h"
 
-
-ble_driver_t ble_driver;
+ble_driver_t ble_driver = {
+    .m_conn_handle = BLE_CONN_HANDLE_INVALID,
+    .m_peer_id = PM_PEER_ID_INVALID,
+    .keyboard_led = 0,
+};
 
 /**@brief Callback function for asserts in the SoftDevice.
  *
@@ -66,20 +69,6 @@ void assert_nrf_callback(uint16_t line_num, const uint8_t * p_file_name)
 {
     app_error_handler(DEAD_BEEF, line_num, p_file_name);
 }
-
-/**@brief Function for putting the chip into sleep mode.
- *
- * @note This function will not return.
- */
-static void sleep_mode_enter(void)
-{
-    ret_code_t err_code;
-
-    // Go to system-off mode (this function will not return; wakeup will cause a reset).
-    err_code = sd_power_system_off();
-    APP_ERROR_CHECK(err_code);
-}
-
 
 /**@brief Function for handling BLE events.
  *

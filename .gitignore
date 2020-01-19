@@ -16,3 +16,4 @@ build/
 !keyboard/*/binary/*.hex
 tmk_core/tool/nrf52/nRF5_SDK*
 keyboard/nrfble/ses/Output/*
+keyboard/nrfble/_build/*
