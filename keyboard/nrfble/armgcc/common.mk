@@ -1,5 +1,6 @@
 COMMON_DIR = $(TMK_DIR)/common
-SRC_FILES +=	$(COMMON_DIR)/host.c \
+SRC_FILES += \
+	$(COMMON_DIR)/host.c \
 	$(COMMON_DIR)/keyboard.c \
 	$(COMMON_DIR)/action.c \
 	$(COMMON_DIR)/action_tapping.c \
@@ -72,6 +73,12 @@ ifdef KEYMAP_SECTION_ENABLE
     else
 	EXTRALDFLAGS = $(error no ldscript for keymap section)
     endif
+endif
+
+ifdef JLINK_MONITOR_ENABLE
+    SRC_FILES += $(MMD_DIR)/JLINK_MONITOR_ISR_SES.s
+    SRC_FILES += $(MMD_DIR)/JLINK_MONITOR.c
+    OPT_DEFS += -DCONFIG_JLINK_MONITOR_ENABLED
 endif
 
 # Version string
