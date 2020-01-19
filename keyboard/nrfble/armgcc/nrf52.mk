@@ -217,7 +217,7 @@ INC_FOLDERS += \
 LIB_FILES += \
 
 # Optimization flags
-OPT = -O3 -g3 $(OPT_DEF)
+OPT = -O3 -g3 $(OPT_DEFS)
 # Uncomment the line below to enable link time optimization
 #OPT += -flto
 
@@ -227,7 +227,7 @@ CFLAGS += -DAPP_TIMER_V2
 CFLAGS += -DAPP_TIMER_V2_RTC1_ENABLED
 CFLAGS += -DBOARD_CUSTOM
 CFLAGS += -DPROTOCOL_NRF
-CFLAGS += -D__arm__
+#CFLAGS += -D__arm__
 CFLAGS += -DCONFIG_GPIO_AS_PINRESET
 CFLAGS += -DFLOAT_ABI_HARD
 CFLAGS += -DNRF52
@@ -274,10 +274,10 @@ LDFLAGS += -Wl,--gc-sections
 # use newlib in nano version
 LDFLAGS += --specs=nano.specs
 
-nrf52832_xxaa: CFLAGS += -D__HEAP_SIZE=8192
-nrf52832_xxaa: CFLAGS += -D__STACK_SIZE=8192
-nrf52832_xxaa: ASMFLAGS += -D__HEAP_SIZE=8192
-nrf52832_xxaa: ASMFLAGS += -D__STACK_SIZE=8192
+$(PROJECT): CFLAGS += -D__HEAP_SIZE=8192
+$(PROJECT): CFLAGS += -D__STACK_SIZE=8192
+$(PROJECT): ASMFLAGS += -D__HEAP_SIZE=8192
+$(PROJECT): ASMFLAGS += -D__STACK_SIZE=8192
 
 # Add standard libraries at the very end of the linker input, after all objects
 # that may need symbols provided by these libraries.
