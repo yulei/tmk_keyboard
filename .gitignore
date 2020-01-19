@@ -15,3 +15,4 @@ build/
 !converter/*/binary/*.hex
 !keyboard/*/binary/*.hex
 tmk_core/tool/nrf52/nRF5_SDK*
+keyboard/nrfble/ses/Output/*
