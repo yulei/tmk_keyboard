@@ -36,7 +36,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define UART_READY_PIN 0
 #define UART_BUF_SIZE 64
 
-static volatile uint32_t uart_recv_size = 0;
+static volatile uint8_t uart_recv_size = 0;
 static volatile bool uart_data_ready = false;
 static uint8_t uart_recv_buf[UART_BUF_SIZE];
 /*
