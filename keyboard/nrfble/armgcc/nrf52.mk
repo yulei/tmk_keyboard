@@ -1,7 +1,8 @@
+
+SDK_ROOT         := $(TMK_DIR)/tool/nrf52/nRF5_SDK_16.0.0_98a08e2
 TARGETS          := $(PROJECT)
 OUTPUT_DIRECTORY := _build
 
-SDK_ROOT := $(TMK_DIR)/tool/nrf52/nRF5_SDK_16.0.0_98a08e2
 
 $(OUTPUT_DIRECTORY)/$(PROJECT).elf: \
   LINKER_SCRIPT  := $(MCU_LDSCRIPT)
@@ -13,28 +14,32 @@ OPT = -O3 -g3
 # Uncomment the line below to enable link time optimization
 #OPT += -flto
 
+# Common options
+OPT_COMMON += -mcpu=cortex-m4
+OPT_COMMON += -mthumb -mabi=aapcs
+OPT_COMMON += -mfloat-abi=hard -mfpu=fpv4-sp-d16
+OPT_COMMON += -DAPP_TIMER_V2
+OPT_COMMON += -DAPP_TIMER_V2_RTC1_ENABLED
+OPT_COMMON += -DBOARD_CUSTOM
+OPT_COMMON += -DCONFIG_GPIO_AS_PINRESET
+OPT_COMMON += -DFLOAT_ABI_HARD
+OPT_COMMON += -DNRF52
+OPT_COMMON += -DNRF52832_XXAA
+OPT_COMMON += -DNRF52_PAN_74
+OPT_COMMON += -DNRF_SD_BLE_API_VERSION=7
+OPT_COMMON += -DS132
+OPT_COMMON += -DSOFTDEVICE_PRESENT
+
 # Definitions from tmk
-OPT += $(OPT_DEFS)
+CFLAGS += $(OPT_DEFS)
+
+# Add protocol definition
+CFLAGS += -DPROTOCOL_NRF
 
 # C flags common to all targets
 CFLAGS += $(OPT)
-CFLAGS += -DAPP_TIMER_V2
-CFLAGS += -DAPP_TIMER_V2_RTC1_ENABLED
-CFLAGS += -DBOARD_CUSTOM
-CFLAGS += -DPROTOCOL_NRF
-#CFLAGS += -D__arm__
-CFLAGS += -DCONFIG_GPIO_AS_PINRESET
-CFLAGS += -DFLOAT_ABI_HARD
-CFLAGS += -DNRF52
-CFLAGS += -DNRF52832_XXAA
-CFLAGS += -DNRF52_PAN_74
-CFLAGS += -DNRF_SD_BLE_API_VERSION=7
-CFLAGS += -DS132
-CFLAGS += -DSOFTDEVICE_PRESENT
-CFLAGS += -mcpu=cortex-m4
-CFLAGS += -mthumb -mabi=aapcs
+CFLAGS += $(OPT_COMMON)
 CFLAGS += -Wall -Werror
-CFLAGS += -mfloat-abi=hard -mfpu=fpv4-sp-d16
 # keep every function in a separate section, this allows linker to discard unused ones
 CFLAGS += -ffunction-sections -fdata-sections -fno-strict-aliasing
 CFLAGS += -fno-builtin -fshort-enums
@@ -42,22 +47,10 @@ CFLAGS += -include $(CONFIG_H)
 
 # C++ flags common to all targets
 CXXFLAGS += $(OPT)
+
 # Assembler flags common to all targets
 ASMFLAGS += -g3
-ASMFLAGS += -mcpu=cortex-m4
-ASMFLAGS += -mthumb -mabi=aapcs
-ASMFLAGS += -mfloat-abi=hard -mfpu=fpv4-sp-d16
-ASMFLAGS += -DAPP_TIMER_V2
-ASMFLAGS += -DAPP_TIMER_V2_RTC1_ENABLED
-ASMFLAGS += -DBOARD_PCA10040
-ASMFLAGS += -DCONFIG_GPIO_AS_PINRESET
-ASMFLAGS += -DFLOAT_ABI_HARD
-ASMFLAGS += -DNRF52
-ASMFLAGS += -DNRF52832_XXAA
-ASMFLAGS += -DNRF52_PAN_74
-ASMFLAGS += -DNRF_SD_BLE_API_VERSION=7
-ASMFLAGS += -DS132
-ASMFLAGS += -DSOFTDEVICE_PRESENT
+ASMFLAGS += $(OPT_COMMON)
 
 # Linker flags
 LDFLAGS += $(OPT)
@@ -77,13 +70,6 @@ $(PROJECT): ASMFLAGS += -D__STACK_SIZE=8192
 #############################################################################
 ####     tool definitions
 #############################################################################
-VERBOSE ?= 0
-PASS_LINKER_INPUT_VIA_FILE  ?= 0
-
-.SUFFIXES: # ignore built-in rules
-%.d:       # don't try to make .d files
-.PRECIOUS: %.d %.o
-
 MK      := mkdir
 RM      := rm -rf
 CC      := arm-none-eabi-gcc
@@ -95,6 +81,13 @@ NM      := arm-none-eabi-nm
 OBJDUMP := arm-none-eabi-objdump
 OBJCOPY := arm-none-eabi-objcopy
 SIZE    := arm-none-eabi-size
+
+VERBOSE ?= 0
+PASS_LINKER_INPUT_VIA_FILE  ?= 0
+
+.SUFFIXES: # ignore built-in rules
+%.d:       # don't try to make .d files
+.PRECIOUS: %.d %.o
 
 # echo suspend
 ifeq ($(VERBOSE),1)
