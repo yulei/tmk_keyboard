@@ -24,11 +24,11 @@
 #define NRF_NAME(x) NRF_XSTR(x)
 
 #ifndef PRODUCT
-    #define PRODUCT                         "BLE keyboard"
+    #define PRODUCT                         BLE keyboard
 #endif
 
 #ifndef MANUFACTURER
-    #define MANUFACTURER                    "astro"
+    #define MANUFACTURER                    astro
 #endif
 
 #define DEVICE_NAME                         NRF_NAME(PRODUCT)                           /**< Name of device. Will be included in the advertising data. */
@@ -82,11 +82,11 @@
 #define OUTPUT_REPORT_MAX_LEN               1                                          /**< Maximum length of Output Report. */
 #define OUTPUT_REP_REF_ID                   0                                          /**< Id of reference to Keyboard Output Report. */
 
-#define FEATURE_REP_REF_ID                  0                                          /**< ID of reference to Keyboard Feature Report. */
-#define FEATURE_REPORT_MAX_LEN              2                                          /**< Maximum length of Feature Report. */
 #define FEATURE_REPORT_INDEX                0                                          /**< Index of Feature Report. */
+#define FEATURE_REPORT_MAX_LEN              2                                          /**< Maximum length of Feature Report. */
+#define FEATURE_REP_REF_ID                  0                                          /**< ID of reference to Keyboard Feature Report. */
 
-#define MAX_BUFFER_ENTRIES                  5                                          /**< Number of elements that can be enqueued */
+#define MAX_BUFFER_ENTRIES                  6                                          /**< Number of elements that can be enqueued */
 
 #define BASE_USB_HID_SPEC_VERSION           0x0101                                     /**< Version number of base USB HID Specification implemented by this application. */
 

@@ -3,15 +3,18 @@ OUTPUT_DIRECTORY := _build
 
 SDK_ROOT := $(TMK_DIR)/tool/nrf52/nRF5_SDK_16.0.0_98a08e2
 
-$(OUTPUT_DIRECTORY)/$(PROJECT).out: \
+$(OUTPUT_DIRECTORY)/$(PROJECT).elf: \
   LINKER_SCRIPT  := $(MCU_LDSCRIPT)
 
 include $(TOOL_DIR)/nrf52_src.mk
 
 # Optimization flags
-OPT = -O3 -g3 $(OPT_DEFS)
+OPT = -O3 -g3
 # Uncomment the line below to enable link time optimization
 #OPT += -flto
+
+# Definitions from tmk
+OPT += $(OPT_DEFS)
 
 # C flags common to all targets
 CFLAGS += $(OPT)
@@ -75,14 +78,23 @@ $(PROJECT): ASMFLAGS += -D__STACK_SIZE=8192
 ####     tool definitions
 #############################################################################
 VERBOSE ?= 0
-PASS_LINKER_INPUT_VIA_FILE  ?= 1
+PASS_LINKER_INPUT_VIA_FILE  ?= 0
 
 .SUFFIXES: # ignore built-in rules
 %.d:       # don't try to make .d files
 .PRECIOUS: %.d %.o
 
-MK := mkdir
-RM := rm -rf
+MK      := mkdir
+RM      := rm -rf
+CC      := arm-none-eabi-gcc
+CXX     := arm-none-eabi-c++
+AS      := arm-none-eabi-as
+AR      := arm-none-eabi-ar -r
+LD      := arm-none-eabi-ld
+NM      := arm-none-eabi-nm
+OBJDUMP := arm-none-eabi-objdump
+OBJCOPY := arm-none-eabi-objcopy
+SIZE    := arm-none-eabi-size
 
 # echo suspend
 ifeq ($(VERBOSE),1)
@@ -108,15 +120,6 @@ endif # ifneq(, $(OTHER_GOALS))
 else # ifneq (,$(filter clean, $(MAKECMDGOALS)))
 
 # Toolchain commands
-CC      := arm-none-eabi-gcc
-CXX     := arm-none-eabi-c++
-AS      := arm-none-eabi-as
-AR      := arm-none-eabi-ar -r
-LD      := arm-none-eabi-ld
-NM      := arm-none-eabi-nm
-OBJDUMP := arm-none-eabi-objdump
-OBJCOPY := arm-none-eabi-objcopy
-SIZE    := arm-none-eabi-size
 
 # $1 type of item
 # $2 items paths to check
@@ -135,8 +138,7 @@ define bind_obj_with_src
 $(eval $(1)     := $(2)) \
 $(eval $(1)_INC := $(3)) \
 $(eval $(1)_TGT := $(4)) \
-$(eval $(1): Makefile | $(dir $(1)).) \
-$(if $(GENERATE_INC_FILE), $(eval $(1): $(3)))
+$(eval $(1): Makefile | $(dir $(1)).)
 endef
 
 # $1 target name
@@ -189,9 +191,9 @@ endef
 # $1 target name
 define define_target
 $(eval OUTPUT_FILE := $(OUTPUT_DIRECTORY)/$(strip $(1))) \
-$(eval $(1): $(OUTPUT_FILE).out $(OUTPUT_FILE).hex $(OUTPUT_FILE).bin \
+$(eval $(1): $(OUTPUT_FILE).elf $(OUTPUT_FILE).hex $(OUTPUT_FILE).bin \
            ; @echo DONE $(strip $(1))) \
-$(call prepare_build, $(1), $(OUTPUT_FILE).inc, $(OUTPUT_FILE).out)
+$(call prepare_build, $(1), $(OUTPUT_FILE).inc, $(OUTPUT_FILE).elf)
 endef
 
 # $1 target name
@@ -237,27 +239,27 @@ endef
 	$(call run,$(CC) -x assembler-with-cpp,$(ASMFLAGS),Assembling)
 
 ifeq ($(PASS_LINKER_INPUT_VIA_FILE),1)
-GENERATE_LD_INPUT_FILE = $(file >$(@:.out=.in), $^ $(LIB_FILES)) 
-LD_INPUT               = @$(@:.out=.in)
+GENERATE_LD_INPUT_FILE = $(file >$(@:.elf=.in), $^ $(LIB_FILES)) 
+LD_INPUT               = @$(@:.elf=.in)
 else
 GENERATE_LD_INPUT_FILE =
 LD_INPUT               = $^ $(LIB_FILES)
 endif
 
 # Link object files
-%.out:
+%.elf:
 	$(info Linking target: $@)
 	$(NO_ECHO)$(GENERATE_LD_INPUT_FILE)
-	$(NO_ECHO)$(CC) $(LDFLAGS) $(LD_INPUT) -Wl,-Map=$(@:.out=.map) -o $@
+	$(NO_ECHO)$(CC) $(LDFLAGS) $(LD_INPUT) -Wl,-Map=$(@:.elf=.map) -o $@
 	$(NO_ECHO)$(SIZE) $@
 
 # Create binary .bin file from the .out file
-%.bin: %.out
+%.bin: %.elf
 	$(info Preparing: $@)
 	$(NO_ECHO)$(OBJCOPY) -O binary $< $@
 
 # Create binary .hex file from the .out file
-%.hex: %.out
+%.hex: %.elf
 	$(info Preparing: $@)
 	$(NO_ECHO)$(OBJCOPY) -O ihex $< $@
 
