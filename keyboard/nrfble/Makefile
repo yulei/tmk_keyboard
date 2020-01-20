@@ -40,7 +40,6 @@ BOOTMAGIC_ENABLE = yes	# Virtual DIP switch configuration
 
 JLINK_MONITOR_ENABLE = yes
 
-include $(TOOL_DIR)/common.mk
+include $(TOOL_DIR)/tmk.mk
 include $(TOOL_DIR)/ble.mk
-include $(TOOL_DIR)/porting.mk
 include $(TOOL_DIR)/nrf52.mk

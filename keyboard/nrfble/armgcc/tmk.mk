@@ -63,28 +63,5 @@ ifdef BACKLIGHT_ENABLE
     OPT_DEFS += -DBACKLIGHT_ENABLE
 endif
 
-ifdef KEYMAP_SECTION_ENABLE
-    OPT_DEFS += -DKEYMAP_SECTION_ENABLE
-
-    ifeq ($(strip $(MCU)),atmega32u2)
-	EXTRALDFLAGS = -Wl,-L$(TMK_DIR),-Tldscript_keymap_avr35.x
-    else ifeq ($(strip $(MCU)),atmega32u4)
-	EXTRALDFLAGS = -Wl,-L$(TMK_DIR),-Tldscript_keymap_avr5.x
-    else
-	EXTRALDFLAGS = $(error no ldscript for keymap section)
-    endif
-endif
-
-ifdef JLINK_MONITOR_ENABLE
-    SRC_FILES += $(MMD_DIR)/JLINK_MONITOR_ISR_SES.s
-    SRC_FILES += $(MMD_DIR)/JLINK_MONITOR.c
-    OPT_DEFS += -DCONFIG_JLINK_MONITOR_ENABLED
-endif
-
 # Version string
 OPT_DEFS += -DVERSION=$(shell (git describe --always --dirty || echo 'unknown') 2> /dev/null)
-
-# Bootloader address
-#ifdef STM32_BOOTLOADER_ADDRESS
-#    OPT_DEFS += -DSTM32_BOOTLOADER_ADDRESS=$(STM32_BOOTLOADER_ADDRESS)
-#endif
