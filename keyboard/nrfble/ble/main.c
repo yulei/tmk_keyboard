@@ -49,8 +49,8 @@
 #include "ble_hid_service.h"
 
 ble_driver_t ble_driver = {
-    .m_conn_handle = BLE_CONN_HANDLE_INVALID,
-    .m_peer_id = PM_PEER_ID_INVALID,
+    .conn_handle = BLE_CONN_HANDLE_INVALID,
+    .peer_id = PM_PEER_ID_INVALID,
     .keyboard_led = 0,
 };
 
@@ -83,8 +83,8 @@ static void ble_evt_handler(ble_evt_t const * p_ble_evt, void * p_context)
     {
         case BLE_GAP_EVT_CONNECTED:
             NRF_LOG_INFO("Connected");
-            ble_driver.m_conn_handle = p_ble_evt->evt.gap_evt.conn_handle;
-            ble_qwr_update_handle(ble_driver.m_conn_handle);
+            ble_driver.conn_handle = p_ble_evt->evt.gap_evt.conn_handle;
+            ble_qwr_update_handle(ble_driver.conn_handle);
             break;
 
         case BLE_GAP_EVT_DISCONNECTED:
@@ -92,7 +92,7 @@ static void ble_evt_handler(ble_evt_t const * p_ble_evt, void * p_context)
             // Dequeue all keys without transmission.
             ble_hid_service_flush(false);
 
-            ble_driver.m_conn_handle = BLE_CONN_HANDLE_INVALID;
+            ble_driver.conn_handle = BLE_CONN_HANDLE_INVALID;
 
             break; // BLE_GAP_EVT_DISCONNECTED
 

@@ -227,10 +227,10 @@ static uint32_t send_report(ble_hids_t * p_hids, uint8_t report_index, uint8_t* 
     ret_code_t err_code;
 
     if (!m_in_boot_mode) {
-        err_code = ble_hids_inp_rep_send(p_hids, report_index, report_len, report_data, ble_driver.m_conn_handle);
+        err_code = ble_hids_inp_rep_send(p_hids, report_index, report_len, report_data, ble_driver.conn_handle);
     } else {
         // in boot mode, only keyboard report was supported
-        err_code = ble_hids_boot_kb_inp_rep_send(p_hids, report_len, report_data, ble_driver.m_conn_handle);
+        err_code = ble_hids_boot_kb_inp_rep_send(p_hids, report_len, report_data, ble_driver.conn_handle);
     }
 
     return err_code;
@@ -365,7 +365,7 @@ static void on_hid_rep_char_write(ble_hids_evt_t * p_evt) {
                                              report_index,
                                              OUTPUT_REPORT_MAX_LEN,
                                              0,
-                                             ble_driver.m_conn_handle,
+                                             ble_driver.conn_handle,
                                              &report_val);
             APP_ERROR_CHECK(err_code);
             ble_driver.keyboard_led = report_val;

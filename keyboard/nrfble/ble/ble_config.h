@@ -134,9 +134,9 @@ typedef enum {
 #endif
 
 typedef struct {
-    uint16_t m_conn_handle;     /**< Handle of the current connection. */
-    pm_peer_id_t m_peer_id;     /**< Device reference handle to the current bonded central. */
-    uint8_t      keyboard_led;  /**< keyboard led status */
+    uint16_t      conn_handle;    /**< Handle of the current connection. */
+    pm_peer_id_t  peer_id;        /**< Device reference handle to the current bonded central. */
+    uint8_t       keyboard_led;   /**< keyboard led status */
 } ble_driver_t;
 
 extern ble_driver_t ble_driver;

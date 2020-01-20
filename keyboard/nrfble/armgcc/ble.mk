@@ -3,6 +3,8 @@ SRC_FILES += \
 					$(BLE_DIR)/ble_bat_service.c \
 					$(BLE_DIR)/ble_hid_service.c \
 					$(BLE_DIR)/ble_services.c \
+					$(BLE_DIR)/ble_keyboard.c \
+					$(BLE_DIR)/main.c \
 					$(PORTING_DIR)/bootloader.c \
 					$(PORTING_DIR)/eeprom.c \
 					$(PORTING_DIR)/printf.c \

@@ -1,5 +1,5 @@
 /**
-  * nrfble.h
+  * keymap_common.h
   *
   */
 #pragma once

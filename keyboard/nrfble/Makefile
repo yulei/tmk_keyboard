@@ -12,7 +12,7 @@ MMD_DIR = $(PROJ_DIR)/mmd
 TMK_DIR = ../../tmk_core
 
 # project specific files
-SRC_FILES += matrix.c nrfble.c main.c ble_keyboard.c
+SRC_FILES += matrix.c
 
 INC_FOLDERS += $(PROJ_DIR)
 
