@@ -104,7 +104,7 @@ void ble_hid_service_init(void) {
         // Initialize HID Service
         p_input_report = &input_report_array[i];
         p_input_report->max_len             = report_entries[i].report_len;
-        p_input_report->rep_ref.report_id   = report_entries[i].report_index;
+        p_input_report->rep_ref.report_id   = report_entries[i].report_index+1;
         p_input_report->rep_ref.report_type = BLE_HIDS_REP_TYPE_INPUT;
 
         p_input_report->sec.cccd_wr = SEC_JUST_WORKS;
@@ -223,25 +223,11 @@ void ble_hid_service_send_report(uint8_t report_id, uint8_t* report_data) {
  *             for failure.
  *
  */
- static uint8_t m_sample_key_press_scan_str[] = /**< Key pattern to be sent when the key press button has been pushed. */
-{
-    0x00,
-    0x00,
-    0x0b,       /* Key h */
-    0x08,       /* Key e */
-    0x0f,       /* Key l */
-    0x0f,       /* Key l */
-    0x12,       /* Key o */
-    0x28        /* Key Return */
-};
 static uint32_t send_report(ble_hids_t * p_hids, uint8_t report_index, uint8_t* report_data, uint8_t report_len) {
     ret_code_t err_code;
 
     if (!m_in_boot_mode) {
-        
-
-        //err_code = ble_hids_inp_rep_send(p_hids, report_index, report_len, report_data, ble_driver.conn_handle);
-        err_code = ble_hids_inp_rep_send(p_hids, 0, 8, m_sample_key_press_scan_str, ble_driver.conn_handle);
+        err_code = ble_hids_inp_rep_send(p_hids, report_index, report_len, report_data, ble_driver.conn_handle);
     } else {
         // in boot mode, only keyboard report was supported
         err_code = ble_hids_boot_kb_inp_rep_send(p_hids, report_len, report_data, ble_driver.conn_handle);

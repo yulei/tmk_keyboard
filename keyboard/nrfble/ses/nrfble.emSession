@@ -49,7 +49,7 @@
  </TraceWindow>
  <Watch1>
   <Watches active="1" update="Never">
-   <Watchpoint expression="report_entries[0]" name="report_entries[0]" radix="-1" linenumber="0" filename=""/>
+   <Watchpoint expression="report_entries[0]" name="report_entries[0]" radix="-1" linenumber="0" filename="../ses"/>
   </Watches>
  </Watch1>
  <Watch2>
@@ -63,16 +63,16 @@
  </Watch4>
  <Files>
   <SessionOpenFile windowGroup="DockEditLeft" x="0" y="222" useTextEdit="1" useBinaryEdit="0" left="0" path="../ble/main.c" selected="1" top="203" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="2" y="235" useTextEdit="1" useBinaryEdit="0" left="0" path="../ble/ble_hid_service.c" selected="0" top="214" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="112" y="229" useTextEdit="1" useBinaryEdit="0" left="0" path="../ble/ble_hid_service.c" selected="0" top="201" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="0" y="68" useTextEdit="1" useBinaryEdit="0" left="0" path="../ble/ble_keyboard.c" selected="0" top="46" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="0" y="23" useTextEdit="1" useBinaryEdit="0" left="0" path="../ble/ble_services.c" selected="0" top="9" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" useBinaryEdit="0" left="0" path="../matrix.c" selected="0" top="33" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="136" useTextEdit="1" useBinaryEdit="0" left="0" path="../../../tmk_core/common/keyboard.c" selected="0" top="110" codecName=""/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="50" useTextEdit="1" useBinaryEdit="0" left="0" path="../../../tmk_core/common/action.c" selected="0" top="29" codecName=""/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="39" useTextEdit="1" useBinaryEdit="0" left="0" path="../../../tmk_core/common/action_tapping.c" selected="0" top="18" codecName=""/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="121" useTextEdit="1" useBinaryEdit="0" left="0" path="../../../tmk_core/tool/nrf52/nRF5_SDK_16.0.0_98a08e2/components/libraries/util/app_error.c" selected="0" top="104" codecName=""/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="1389" useTextEdit="1" useBinaryEdit="0" left="0" path="../../../tmk_core/tool/nrf52/nRF5_SDK_16.0.0_98a08e2/components/ble/ble_services/ble_hids/ble_hids.c" selected="0" top="1369" codecName=""/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="635" useTextEdit="1" useBinaryEdit="0" left="0" path="../../../tmk_core/tool/nrf52/nRF5_SDK_16.0.0_98a08e2/components/softdevice/s132/headers/ble_gatts.h" selected="0" top="618" codecName=""/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="136" useTextEdit="1" useBinaryEdit="0" left="0" path="../../../tmk_core/common/keyboard.c" selected="0" top="110" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="50" useTextEdit="1" useBinaryEdit="0" left="0" path="../../../tmk_core/common/action.c" selected="0" top="29" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="39" useTextEdit="1" useBinaryEdit="0" left="0" path="../../../tmk_core/common/action_tapping.c" selected="0" top="18" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="121" useTextEdit="1" useBinaryEdit="0" left="0" path="../../../tmk_core/tool/nrf52/nRF5_SDK_16.0.0_98a08e2/components/libraries/util/app_error.c" selected="0" top="104" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="1389" useTextEdit="1" useBinaryEdit="0" left="0" path="../../../tmk_core/tool/nrf52/nRF5_SDK_16.0.0_98a08e2/components/ble/ble_services/ble_hids/ble_hids.c" selected="0" top="1369" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="635" useTextEdit="1" useBinaryEdit="0" left="0" path="../../../tmk_core/tool/nrf52/nRF5_SDK_16.0.0_98a08e2/components/softdevice/s132/headers/ble_gatts.h" selected="0" top="618" codecName="Default"/>
  </Files>
  <ARMCrossStudioWindow activeProject="nrfble" fileDialogDefaultFilter="*.c" autoConnectTarget="J-Link" buildConfiguration="Debug" sessionSettings="" debugSearchFileMap="" fileDialogInitialDirectory="C:/msys64/home/leiyu/tmk_keyboard/keyboard/nrfble/mmd" debugSearchPath="" autoConnectCapabilities="3711"/>
 </session>
