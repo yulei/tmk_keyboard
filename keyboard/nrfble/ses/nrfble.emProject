@@ -88,17 +88,10 @@
       <file file_name="../../../tmk_core/tool/nrf52/nRF5_SDK_16.0.0_98a08e2/modules/nrfx/drivers/src/nrfx_uarte.c" />
     </folder>
     <folder Name="Application">
-      <file file_name="../main.c" />
-      <file file_name="../sdk_config.h" />
-      <file file_name="../ble_keyboard.c" />
       <file file_name="../keymap_plain.c" />
       <file file_name="../matrix.c" />
-      <file file_name="../nrfble.c" />
-      <file file_name="../ble_config.h" />
-      <file file_name="../ble_keyboard.h" />
       <file file_name="../config.h" />
-      <file file_name="../custom_board.h" />
-      <file file_name="../nrfble.h" />
+      <file file_name="../keymap_common.h" />
       <folder Name="porting">
         <file file_name="../porting/wait_api.h" />
         <file file_name="../porting/bootloader.c" />
@@ -122,6 +115,12 @@
         <file file_name="../../../tmk_core/common/bootmagic.c" />
       </folder>
       <folder Name="ble">
+        <file file_name="../ble/main.c" />
+        <file file_name="../ble/sdk_config.h" />
+        <file file_name="../ble/ble_config.h" />
+        <file file_name="../ble/custom_board.h" />
+        <file file_name="../ble/ble_keyboard.h" />
+        <file file_name="../ble/ble_keyboard.c" />
         <file file_name="../ble/ble_adv_service.c" />
         <file file_name="../ble/ble_adv_service.h" />
         <file file_name="../ble/ble_bat_service.c" />
@@ -178,6 +177,7 @@
       c_preprocessor_definitions=""
       c_user_include_directories="../porting;./../../tmk_core/common;../../../tmk_core/protocol" />
     <configuration
+      JLinkExecuteCommand="SetMonModeDebug = 1;SetMonModeVTableAddr = 0x26000"
       Name="Debug"
       build_intermediate_directory="Output/$(Configuration)/Obj"
       c_additional_options=""

@@ -47,6 +47,7 @@
 #include "ble_services.h"
 #include "ble_adv_service.h"
 #include "ble_hid_service.h"
+#include "ble_keyboard.h"
 
 ble_driver_t ble_driver = {
     .conn_handle = BLE_CONN_HANDLE_INVALID,
@@ -232,10 +233,12 @@ int main(void)
     ble_stack_init();
     scheduler_init();
     ble_services_init();
+    ble_keyboard_init();
 
     // Start execution.
     NRF_LOG_INFO("HID Keyboard example started.");
     ble_services_start(erase_bonds);
+    ble_keyboard_start();
 
     // Enter main loop.
     for (;;)
