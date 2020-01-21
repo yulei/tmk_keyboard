@@ -15,6 +15,7 @@ SRC_FILES += \
 
 INC_FOLDERS += $(COMMON_DIR)
 
+
 # Option modules
 ifdef BOOTMAGIC_ENABLE
     SRC_FILES += $(COMMON_DIR)/bootmagic.c
@@ -31,6 +32,7 @@ endif
 ifdef EXTRAKEY_ENABLE
     OPT_DEFS += -DEXTRAKEY_ENABLE
 endif
+
 
 ifdef CONSOLE_ENABLE
     OPT_DEFS += -DCONSOLE_ENABLE
@@ -61,6 +63,12 @@ endif
 ifdef BACKLIGHT_ENABLE
     SRC_FILES += $(COMMON_DIR)/backlight.c
     OPT_DEFS += -DBACKLIGHT_ENABLE
+endif
+
+ifdef_any_of = $(filter-out undefined,$(foreach v,$(1),$(origin $(v))))
+ifneq ($(call ifdef_any_of, MOUSEKEY_ENABLE EXTRAKEY_ENABLE),)
+		OPT_DEFS += -DWITH_LUFA=1
+		INC_FOLDERS += $(TMK_DIR)/protocol/lufa/LUFA-git
 endif
 
 # Version string

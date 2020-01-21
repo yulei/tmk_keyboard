@@ -8,20 +8,26 @@
 #include "ble_hid_descriptor.h"
 
 typedef struct {
-    uint8_t report_index;
+    uint8_t report_id;
     uint8_t report_len;
 } report_entry_t;
 
-static report_entry_t report_entries[NRF_INPUT_REPORT_MAX_INDEX] = {
-    {NRF_INPUT_REPORT_KEYBOARD_INDEX, NRF_INPUT_REPORT_KEYBOARD_MAX_LEN},
+static report_entry_t report_entries[NRF_REPORT_ID_MAX] = {
+    {NRF_REPORT_ID_KEYBOARD, NRF_INPUT_REPORT_KEYBOARD_MAX_LEN},
 #ifdef MOUSE_ENABLE
-    {NRF_INPUT_REPORT_MOUSE_INDEX, NRF_INPUT_REPORT_MOUSE_MAX_LEN},
+    {NRF_REPORT_ID_MOUSE, NRF_INPUT_REPORT_MOUSE_MAX_LEN},
 #endif
 #ifdef EXTRAKEY_ENABLE
-    {NRF_INPUT_REPORT_SYSTEM_INDEX, NRF_INPUT_REPORT_SYSTEM_MAX_LEN},
-    {NRF_INPUT_REPORT_CONSUMER_INDEX, NRF_INPUT_REPORT_CONSUMER_MAX_LEN},
+    {NRF_REPORT_ID_SYSTEM, NRF_INPUT_REPORT_SYSTEM_MAX_LEN},
+    {NRF_REPORT_ID_CONSUMER, NRF_INPUT_REPORT_CONSUMER_MAX_LEN},
 #endif
     };
+
+#if WITH_LUFA
+#define REPORT_ID_TO_INDEX(x) ((x)-1)
+#else
+#define REPORT_ID_TO_INDEX(x) (x)
+#endif
 
 /**Buffer queue access macros
  *
@@ -92,7 +98,7 @@ void ble_hid_service_init(void) {
     ble_hids_outp_rep_init_t    * p_output_report;
     ble_hids_feature_rep_init_t * p_feature_report;
 
-    static ble_hids_inp_rep_init_t     input_report_array[NRF_INPUT_REPORT_MAX_INDEX];
+    static ble_hids_inp_rep_init_t     input_report_array[NRF_REPORT_ID_MAX];
     static ble_hids_outp_rep_init_t    output_report_array[1];
     static ble_hids_feature_rep_init_t feature_report_array[1];
 
@@ -100,11 +106,11 @@ void ble_hid_service_init(void) {
     memset((void *)output_report_array, 0, sizeof(ble_hids_outp_rep_init_t));
     memset((void *)feature_report_array, 0, sizeof(ble_hids_feature_rep_init_t));
 
-    for (int i = 0; i < NRF_INPUT_REPORT_MAX_INDEX; i++) {
+    for (int i = 0; i < NRF_REPORT_ID_MAX; i++) {
         // Initialize HID Service
         p_input_report = &input_report_array[i];
         p_input_report->max_len             = report_entries[i].report_len;
-        p_input_report->rep_ref.report_id   = report_entries[i].report_index+1;
+        p_input_report->rep_ref.report_id   = report_entries[i].report_id;
         p_input_report->rep_ref.report_type = BLE_HIDS_REP_TYPE_INPUT;
 
         p_input_report->sec.cccd_wr = SEC_JUST_WORKS;
@@ -187,8 +193,8 @@ void ble_hid_service_send_report(uint8_t report_id, uint8_t* report_data) {
         NRF_LOG_WARNING("Invalid report_id: %d", report_id);
         return;
     }
-    report_index = report_entries[report_id-1].report_index;
-    report_len = report_entries[report_id-1].report_len;
+    report_index  = report_entries[REPORT_ID_TO_INDEX(report_id)].report_id;
+    report_len    = report_entries[REPORT_ID_TO_INDEX(report_id)].report_len;
 
     err_code = send_report(&m_hids, report_index, report_data, report_len);
 

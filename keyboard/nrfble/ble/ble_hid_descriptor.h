@@ -3,8 +3,10 @@
  * @brief definition of hid descriptor
  */
 
+#pragma once
 
 #include "ble_config.h"
+
 #if WITH_LUFA
 #define ATTR_PACKED __attribute__((packed))
 #define CONCAT(x, y) x##y

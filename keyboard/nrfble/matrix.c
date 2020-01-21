@@ -24,8 +24,8 @@ static matrix_row_t matrix[MATRIX_ROWS];
 static matrix_row_t matrix_debouncing[MATRIX_COLS];
 static bool debouncing = false;
 static uint16_t debouncing_time = 0;
-static uint32_t row_pins[] = MATRIX_ROW_PINS;
-static uint32_t col_pins[] = MATRIX_COL_PINS;
+uint32_t row_pins[] = MATRIX_ROW_PINS;
+uint32_t col_pins[] = MATRIX_COL_PINS;
 
 void matrix_setup(void) {}
 
