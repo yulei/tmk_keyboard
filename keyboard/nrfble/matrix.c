@@ -98,3 +98,13 @@ void matrix_print(void)
         printf("\n");
     }
 }
+
+#if 0
+#include "keyboard.h"
+#include "nrf_log.h"
+void hook_matrix_change(keyevent_t event) {
+    NRF_LOG_INFO("Matrix: col:%d--row:%d\n", event.key.col, event.key.row);
+    NRF_LOG_INFO("press? %s\n", (event.pressed ? "true":"false"));
+    NRF_LOG_INFO("time: %d\n", event.time);
+}
+#endif

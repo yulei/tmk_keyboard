@@ -236,7 +236,7 @@ int main(void)
     ble_keyboard_init();
 
     // Start execution.
-    NRF_LOG_INFO("HID Keyboard example started.");
+    NRF_LOG_INFO("NRF BLE Keyboard started.");
     ble_services_start(erase_bonds);
     ble_keyboard_start();
 

@@ -189,11 +189,11 @@ void ble_hid_service_send_report(uint8_t report_id, uint8_t* report_data) {
     ret_code_t err_code;
     uint8_t    report_index;
     uint8_t    report_len;
-    if (report_id >= NRF_REPORT_ID_MAX) {
+    if (report_id > NRF_REPORT_ID_MAX) {
         NRF_LOG_WARNING("Invalid report_id: %d", report_id);
         return;
     }
-    report_index  = report_entries[REPORT_ID_TO_INDEX(report_id)].report_id;
+    report_index  = REPORT_ID_TO_INDEX(report_entries[REPORT_ID_TO_INDEX(report_id)].report_id);
     report_len    = report_entries[REPORT_ID_TO_INDEX(report_id)].report_len;
 
     err_code = send_report(&m_hids, report_index, report_data, report_len);
@@ -239,7 +239,9 @@ static uint32_t send_report(ble_hids_t * p_hids, uint8_t report_index, uint8_t* 
         err_code = ble_hids_boot_kb_inp_rep_send(p_hids, report_len, report_data, ble_driver.conn_handle);
     }
 
-    NRF_LOG_INFO("send_report: %d", err_code);
+    if (err_code != NRF_SUCCESS) {
+        NRF_LOG_WARNING("send report: %d\n", err_code);
+    }
     return err_code;
 }
 
