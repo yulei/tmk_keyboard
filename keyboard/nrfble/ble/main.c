@@ -50,9 +50,11 @@
 #include "ble_keyboard.h"
 
 ble_driver_t ble_driver = {
-    .conn_handle = BLE_CONN_HANDLE_INVALID,
     .peer_id = PM_PEER_ID_INVALID,
+    .conn_handle = BLE_CONN_HANDLE_INVALID,
     .keyboard_led = 0,
+    .usb_status = 0,
+    .output_target = OUTPUT_BLE,
 };
 
 /**@brief Callback function for asserts in the SoftDevice.
@@ -221,7 +223,7 @@ static void idle_state_handle(void)
  */
 int main(void)
 {
-    bool erase_bonds=true;
+    bool erase_bonds = true;
 #if CONFIG_JLINK_MONITOR_ENABLED
     NVIC_SetPriority(DebugMonitor_IRQn, _PRIO_SD_LOW);
 #endif

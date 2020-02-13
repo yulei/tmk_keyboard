@@ -31,6 +31,18 @@
     #define MANUFACTURER                    astro
 #endif
 
+#ifndef USB_SENSE_PIN
+    #define USB_SENSE_PIN                   26                                          /**< Default pin for usb sense */ 
+#endif
+
+#ifndef UART_RX_PIN
+    #define UART_RX_PIN                     24
+#endif
+
+#ifndef UART_TX_PIN
+    #define UART_TX_PIN                     23
+#endif
+
 #define DEVICE_NAME                         NRF_NAME(PRODUCT)                           /**< Name of device. Will be included in the advertising data. */
 #define MANUFACTURER_NAME                   NRF_NAME(MANUFACTURER)                      /**< Manufacturer. Will be passed to Device Information Service. */
 
@@ -128,10 +140,15 @@ typedef enum {
 #define NRF_INPUT_REPORT_CONSUMER_MAX_LEN 2
 #endif
 
+#define OUTPUT_BLE      0x01
+#define OUTPUT_USB      0x02
+
 typedef struct {
-    uint16_t      conn_handle;    /**< Handle of the current connection. */
     pm_peer_id_t  peer_id;        /**< Device reference handle to the current bonded central. */
+    uint16_t      conn_handle;    /**< Handle of the current connection. */
     uint8_t       keyboard_led;   /**< keyboard led status */
+    uint8_t       usb_status;     /**< usb status */
+    uint8_t       output_target;  /**< target of output */
 } ble_driver_t;
 
 extern ble_driver_t ble_driver;
