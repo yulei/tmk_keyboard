@@ -1,7 +1,9 @@
 <!DOCTYPE CrossStudio_Session_File>
 <session>
  <Bookmarks/>
- <Breakpoints groups="Breakpoints" active_group="Breakpoints"/>
+ <Breakpoints groups="Breakpoints" active_group="Breakpoints">
+  <BreakpointListItem trigger="" line="557" counter="0" hardwareBreakpoint="" isFunctionBreakpoint="false" action="" expression="" group="Breakpoints" type="Breakpoint" state="2" filename="../../../tmk_core/tool/nrf52/nRF5_SDK_16.0.0_98a08e2/modules/nrfx/drivers/src/nrfx_gpiote.c" useHWbreakpoint="false"/>
+ </Breakpoints>
  <ExecutionProfileWindow/>
  <FrameBufferWindow>
   <FrameBufferWindow bufferHeight="-1" addressSpace="" addressText="" bufferWidth="-1"/>
@@ -23,6 +25,8 @@
   <ProjectSessionItem path="nrfble;nrfble"/>
   <ProjectSessionItem path="nrfble;nrfble;Application"/>
   <ProjectSessionItem path="nrfble;nrfble;Application;ble"/>
+  <ProjectSessionItem path="nrfble;nrfble;None"/>
+  <ProjectSessionItem path="nrfble;nrfble;nRF_Drivers"/>
   <ProjectSessionItem path="nrfble;nrfble;nRF_Libraries"/>
  </Project>
  <Register1>
@@ -58,20 +62,14 @@
   <Watches active="0" update="Never"/>
  </Watch4>
  <Files>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="23" useTextEdit="1" useBinaryEdit="0" left="0" path="../ble/ble_services.c" selected="0" top="30" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="24" y="236" useTextEdit="1" useBinaryEdit="0" left="0" path="../ble/main.c" selected="1" top="225" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="6" y="99" useTextEdit="1" useBinaryEdit="0" left="0" path="../ble/ble_keyboard.c" selected="0" top="82" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="42" useTextEdit="1" useBinaryEdit="0" left="0" path="../ble/ble_config.h" selected="0" top="18" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" useBinaryEdit="0" left="0" path="../porting/printf.h" selected="0" top="0" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="10" useTextEdit="1" useBinaryEdit="0" left="0" path="../porting/printf.c" selected="0" top="0" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="65" useTextEdit="1" useBinaryEdit="0" left="0" path="../../../tmk_core/tool/nrf52/nRF5_SDK_16.0.0_98a08e2/components/libraries/uart/app_uart.h" selected="0" top="47" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="144" useTextEdit="1" useBinaryEdit="0" left="0" path="../../../tmk_core/tool/nrf52/nRF5_SDK_16.0.0_98a08e2/components/libraries/util/app_error.h" selected="0" top="126" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="163" useTextEdit="1" useBinaryEdit="0" left="0" path="../../../tmk_core/tool/nrf52/nRF5_SDK_16.0.0_98a08e2/components/libraries/uart/app_uart.c" selected="0" top="135" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="125" useTextEdit="1" useBinaryEdit="0" left="0" path="../../../tmk_core/tool/nrf52/nRF5_SDK_16.0.0_98a08e2/components/libraries/uart/app_uart_fifo.c" selected="0" top="106" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" useBinaryEdit="0" left="0" path="../../../tmk_core/tool/nrf52/nRF5_SDK_16.0.0_98a08e2/components/libraries/uart/retarget.c" selected="0" top="138" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="6009" useTextEdit="1" useBinaryEdit="0" left="0" path="../ble/sdk_config.h" selected="0" top="6000" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="79" useTextEdit="1" useBinaryEdit="0" left="0" path="../../../tmk_core/tool/nrf52/nRF5_SDK_16.0.0_98a08e2/components/libraries/util/nordic_common.h" selected="0" top="58" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" useBinaryEdit="0" left="0" path="../../../tmk_core/tool/nrf52/nRF5_SDK_16.0.0_98a08e2/components/libraries/fifo/app_fifo.c" selected="0" top="75" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="226" useTextEdit="1" useBinaryEdit="0" left="0" path="../ble/main.c" selected="0" top="239" codecName=""/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="24" y="375" useTextEdit="1" useBinaryEdit="0" left="0" path="../ble/ble_keyboard.c" selected="0" top="367" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="617" useTextEdit="1" useBinaryEdit="0" left="0" path="../../../tmk_core/tool/nrf52/nRF5_SDK_16.0.0_98a08e2/modules/nrfx/hal/nrf_gpio.h" selected="0" top="597" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="31" y="119" useTextEdit="1" useBinaryEdit="0" left="0" path="../../../tmk_core/tool/nrf52/nRF5_SDK_16.0.0_98a08e2/components/libraries/gpiote/app_gpiote.c" selected="0" top="83" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="35" useTextEdit="1" useBinaryEdit="0" left="0" path="../matrix.c" selected="0" top="35" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="344" useTextEdit="1" useBinaryEdit="0" left="0" path="../../../tmk_core/tool/nrf52/nRF5_SDK_16.0.0_98a08e2/modules/nrfx/drivers/src/nrfx_gpiote.c" selected="0" top="326" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="129" useTextEdit="1" useBinaryEdit="0" left="0" path="../../../tmk_core/common/keyboard.c" selected="0" top="124" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="183" useTextEdit="1" useBinaryEdit="0" left="0" path="../../../tmk_core/tool/nrf52/nRF5_SDK_16.0.0_98a08e2/modules/nrfx/mdk/system_nrf52.c" selected="1" top="165" codecName="Default"/>
  </Files>
- <ARMCrossStudioWindow activeProject="nrfble" fileDialogDefaultFilter="*.c" autoConnectTarget="J-Link" buildConfiguration="Debug" sessionSettings="" debugSearchFileMap="" fileDialogInitialDirectory="D:/msys64/home/astro/tmk_keyboard/tmk_core/tool/nrf52/nRF5_SDK_16.0.0_98a08e2/components/libraries/uart" debugSearchPath="" autoConnectCapabilities="3711"/>
+ <ARMCrossStudioWindow activeProject="nrfble" fileDialogDefaultFilter="" autoConnectTarget="J-Link" buildConfiguration="Debug" sessionSettings="" debugSearchFileMap="" fileDialogInitialDirectory="D:/msys64/home/astro/tmk_keyboard/tmk_core/tool/nrf52/nRF5_SDK_16.0.0_98a08e2/modules/nrfx/drivers/src" debugSearchPath="" autoConnectCapabilities="3711"/>
 </session>

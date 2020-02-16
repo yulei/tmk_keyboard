@@ -140,15 +140,22 @@ typedef enum {
 #define NRF_INPUT_REPORT_CONSUMER_MAX_LEN 2
 #endif
 
+typedef enum {
+    RUN_MODE_INTERRUPT,             /**< running in interrupt mode when in battery supply */
+    RUN_MODE_POLLING,               /**< running in polling mode when in vbus supply */
+} run_mode_t;
+
 #define OUTPUT_BLE      0x01
 #define OUTPUT_USB      0x02
 
 typedef struct {
-    pm_peer_id_t  peer_id;        /**< Device reference handle to the current bonded central. */
-    uint16_t      conn_handle;    /**< Handle of the current connection. */
-    uint8_t       keyboard_led;   /**< keyboard led status */
-    uint8_t       usb_status;     /**< usb status */
-    uint8_t       output_target;  /**< target of output */
+    pm_peer_id_t    peer_id;        /**< Device reference handle to the current bonded central. */
+    run_mode_t      run_mode;       /**< current running mode */
+    uint16_t        conn_handle;    /**< Handle of the current connection. */
+    uint8_t         keyboard_led;   /**< keyboard led status */
+    uint8_t         usb_enabled;    /**< usb status */
+    uint8_t         uart_enabled;   /**< uart status */
+    uint8_t         output_target;  /**< target of output */
 } ble_driver_t;
 
 extern ble_driver_t ble_driver;

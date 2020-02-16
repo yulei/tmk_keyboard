@@ -1413,7 +1413,7 @@
 #endif
 // <o> GPIOTE_CONFIG_NUM_OF_LOW_POWER_EVENTS - Number of lower power input pins 
 #ifndef GPIOTE_CONFIG_NUM_OF_LOW_POWER_EVENTS
-#define GPIOTE_CONFIG_NUM_OF_LOW_POWER_EVENTS 4
+#define GPIOTE_CONFIG_NUM_OF_LOW_POWER_EVENTS 6
 #endif
 
 // <o> GPIOTE_CONFIG_IRQ_PRIORITY  - Interrupt priority
@@ -6035,7 +6035,7 @@
  
 
 #ifndef APP_GPIOTE_ENABLED
-#define APP_GPIOTE_ENABLED 0
+#define APP_GPIOTE_ENABLED 1
 #endif
 
 // <q> APP_PWM_ENABLED  - app_pwm - PWM functionality
