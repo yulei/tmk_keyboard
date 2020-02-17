@@ -36,11 +36,19 @@
 #endif
 
 #ifndef UART_RX_PIN
-    #define UART_RX_PIN                     24
+    #define UART_RX_PIN                     24                                          /**< Default pin for uart rx */
 #endif
 
 #ifndef UART_TX_PIN
-    #define UART_TX_PIN                     23
+    #define UART_TX_PIN                     23                                          /**< Default pin for uart tx */
+#endif
+
+#ifndef BATTERY_SAADC_ENABLE_PIN
+    #define BATTERY_SAADC_ENABLE_PIN        27                                          /**< Enable battery measurement pin */
+#endif
+
+#ifndef BATTERY_SAADC_PIN
+    #define BATTERY_SAADC_PIN               NRF_SAADC_INPUT_AIN4                        /**< Default pin for saadc */
 #endif
 
 #define DEVICE_NAME                         NRF_NAME(PRODUCT)                           /**< Name of device. Will be included in the advertising data. */
@@ -66,10 +74,9 @@
 #define APP_BLE_OBSERVER_PRIO               3                                          /**< Application's BLE observer priority. You shouldn't need to modify this value. */
 #define APP_BLE_CONN_CFG_TAG                1                                          /**< A tag identifying the SoftDevice BLE configuration. */
 
+
+#define BATTERY_LEVEL_MEAS_DELAY            APP_TIMER_TICKS(1)                         /**< Battery level measurement delay (ticks). */
 #define BATTERY_LEVEL_MEAS_INTERVAL         APP_TIMER_TICKS(2000)                      /**< Battery level measurement interval (ticks). */
-#define MIN_BATTERY_LEVEL                   81                                         /**< Minimum simulated battery level. */
-#define MAX_BATTERY_LEVEL                   100                                        /**< Maximum simulated battery level. */
-#define BATTERY_LEVEL_INCREMENT             1                                          /**< Increment between each simulated battery level measurement. */
 
 /*lint -emacro(524, MIN_CONN_INTERVAL) // Loss of precision */
 #define MIN_CONN_INTERVAL                   MSEC_TO_UNITS(7.5, UNIT_1_25_MS)           /**< Minimum connection interval (7.5 ms) */

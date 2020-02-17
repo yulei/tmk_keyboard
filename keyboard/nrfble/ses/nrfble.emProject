@@ -89,6 +89,7 @@
       <file file_name="../../../tmk_core/tool/nrf52/nRF5_SDK_16.0.0_98a08e2/modules/nrfx/drivers/src/nrfx_uart.c" />
       <file file_name="../../../tmk_core/tool/nrf52/nRF5_SDK_16.0.0_98a08e2/modules/nrfx/drivers/src/nrfx_uarte.c" />
       <file file_name="../../../tmk_core/tool/nrf52/nRF5_SDK_16.0.0_98a08e2/modules/nrfx/drivers/src/nrfx_gpiote.c" />
+      <file file_name="../../../tmk_core/tool/nrf52/nRF5_SDK_16.0.0_98a08e2/modules/nrfx/drivers/src/nrfx_saadc.c" />
     </folder>
     <folder Name="Application">
       <file file_name="../keymap_plain.c" />

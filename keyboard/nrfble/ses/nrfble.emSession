@@ -3,6 +3,7 @@
  <Bookmarks/>
  <Breakpoints groups="Breakpoints" active_group="Breakpoints">
   <BreakpointListItem trigger="" line="557" counter="0" hardwareBreakpoint="" isFunctionBreakpoint="false" action="" expression="" group="Breakpoints" type="Breakpoint" state="2" filename="../../../tmk_core/tool/nrf52/nRF5_SDK_16.0.0_98a08e2/modules/nrfx/drivers/src/nrfx_gpiote.c" useHWbreakpoint="false"/>
+  <Exceptions set="MemManage;UsageFault_Coprocessor;UsageFault_CheckingError;UsageFault_StateError;BusFault;ExceptionEntryReturnFault;HardFault"/>
  </Breakpoints>
  <ExecutionProfileWindow/>
  <FrameBufferWindow>
@@ -25,9 +26,7 @@
   <ProjectSessionItem path="nrfble;nrfble"/>
   <ProjectSessionItem path="nrfble;nrfble;Application"/>
   <ProjectSessionItem path="nrfble;nrfble;Application;ble"/>
-  <ProjectSessionItem path="nrfble;nrfble;None"/>
   <ProjectSessionItem path="nrfble;nrfble;nRF_Drivers"/>
-  <ProjectSessionItem path="nrfble;nrfble;nRF_Libraries"/>
  </Project>
  <Register1>
   <RegisterWindow visibleNodes="CPU - Current Context/r0;CPU - Current Context/r1;CPU - Current Context/r2;CPU - Current Context/r3;CPU - Current Context/r4;CPU - Current Context/r5;CPU - Current Context/r6;CPU - Current Context/r7;CPU - Current Context/r8;CPU - Current Context/r9;CPU - Current Context/r10;CPU - Current Context/r11;CPU - Current Context/r12;CPU - Current Context/sp(r13);CPU - Current Context/lr(r14);CPU - Current Context/pc(r15);CPU - Current Context/apsr;CPU/r0;CPU/r1;CPU/r2;CPU/r3;CPU/r4;CPU/r5;CPU/r6;CPU/r7;CPU/r8;CPU/r9;CPU/r10;CPU/r11;CPU/r12;CPU/sp(r13);CPU/lr(r14);CPU/pc(r15);CPU/xpsr;CPU/msp;CPU/psp;CPU/cfbp;CPU/internal" binaryNodes="" asciiNodes="" openNodes="CPU - Current Context" name="nrfble" decimalNodes="" octalNodes="" unsignedNodes=""/>
@@ -62,14 +61,7 @@
   <Watches active="0" update="Never"/>
  </Watch4>
  <Files>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="226" useTextEdit="1" useBinaryEdit="0" left="0" path="../ble/main.c" selected="0" top="239" codecName=""/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="24" y="375" useTextEdit="1" useBinaryEdit="0" left="0" path="../ble/ble_keyboard.c" selected="0" top="367" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="617" useTextEdit="1" useBinaryEdit="0" left="0" path="../../../tmk_core/tool/nrf52/nRF5_SDK_16.0.0_98a08e2/modules/nrfx/hal/nrf_gpio.h" selected="0" top="597" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="31" y="119" useTextEdit="1" useBinaryEdit="0" left="0" path="../../../tmk_core/tool/nrf52/nRF5_SDK_16.0.0_98a08e2/components/libraries/gpiote/app_gpiote.c" selected="0" top="83" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="35" useTextEdit="1" useBinaryEdit="0" left="0" path="../matrix.c" selected="0" top="35" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="344" useTextEdit="1" useBinaryEdit="0" left="0" path="../../../tmk_core/tool/nrf52/nRF5_SDK_16.0.0_98a08e2/modules/nrfx/drivers/src/nrfx_gpiote.c" selected="0" top="326" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="129" useTextEdit="1" useBinaryEdit="0" left="0" path="../../../tmk_core/common/keyboard.c" selected="0" top="124" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="183" useTextEdit="1" useBinaryEdit="0" left="0" path="../../../tmk_core/tool/nrf52/nRF5_SDK_16.0.0_98a08e2/modules/nrfx/mdk/system_nrf52.c" selected="1" top="165" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="226" useTextEdit="1" useBinaryEdit="0" left="0" path="../ble/main.c" selected="1" top="208" codecName="Default"/>
  </Files>
  <ARMCrossStudioWindow activeProject="nrfble" fileDialogDefaultFilter="" autoConnectTarget="J-Link" buildConfiguration="Debug" sessionSettings="" debugSearchFileMap="" fileDialogInitialDirectory="D:/msys64/home/astro/tmk_keyboard/tmk_core/tool/nrf52/nRF5_SDK_16.0.0_98a08e2/modules/nrfx/drivers/src" debugSearchPath="" autoConnectCapabilities="3711"/>
 </session>

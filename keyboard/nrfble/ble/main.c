@@ -236,8 +236,8 @@ int main(void)
     power_management_init();
     ble_stack_init();
     scheduler_init();
-    ble_services_init();
     ble_keyboard_init();
+    ble_services_init();
 
     // Start execution.
     NRF_LOG_INFO("NRF BLE Keyboard started.");
