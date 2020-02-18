@@ -12,6 +12,8 @@
 #include "report.h"
 #include "host.h"
 #include "keyboard.h"
+#include "ws2812_nrf.h"
+#include "pca9554_nrf.h"
 
 // app gpiote
 #define MAX_GPIOTE_USERS  2 /**< usb sense and matrix scann */
@@ -84,6 +86,8 @@ void ble_keyboard_init(void)
     host_set_driver(&kbd_driver);
     keyboard_timer_init();
     keyboard_gpio_init();
+    ws2812_nrf_init();
+    pca9554_nrf_init();
 }
 
 void ble_keyboard_start(void) 
