@@ -1,5 +1,5 @@
 /*
-Copyright 2013,2016 Jun Wako <wakojun@gmail.com>
+Copyright 2013,2016,2020 Jun Wako <wakojun@gmail.com>
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -39,10 +39,9 @@ __attribute__ ((weak))
 action_t action_for_key(uint8_t layer, keypos_t key)
 {
     uint8_t keycode = keymap_key_to_keycode(layer, key);
-    if (keycode>=KC_FN0 && keycode<=KC_FN31) return keymap_fn_to_action(keycode);
     switch (keycode) {
-       // case KC_FN0 ... KC_FN31:
-       //     return keymap_fn_to_action(keycode);
+        case KC_FN0 ... KC_FN31:
+            return keymap_fn_to_action(keycode);
 #ifdef BOOTMAGIC_ENABLE
         case KC_CAPSLOCK:
         case KC_LOCKING_CAPS:
@@ -138,25 +137,20 @@ void action_function(keyrecord_t *record, uint8_t id, uint8_t opt)
 /* translates keycode to action */
 static action_t keycode_to_action(uint8_t keycode)
 {
-    if (keycode>=KC_A && keycode<=KC_EXSEL) return (action_t)ACTION_KEY(keycode);
-    if (keycode>=KC_LCTRL && keycode<=KC_RGUI) return (action_t)ACTION_KEY(keycode);
-    if (keycode>=KC_SYSTEM_POWER && keycode<=KC_SYSTEM_WAKE) return (action_t)ACTION_USAGE_SYSTEM(KEYCODE2SYSTEM(keycode));
-    if (keycode>=KC_AUDIO_MUTE && keycode<=KC_WWW_FAVORITES) return (action_t)ACTION_USAGE_CONSUMER(KEYCODE2CONSUMER(keycode));
-    if (keycode>=KC_MS_UP && keycode<=KC_MS_ACCEL2) return (action_t)ACTION_MOUSEKEY(keycode);
     switch (keycode) {
-        /*case KC_A ... KC_EXSEL:
+        case KC_A ... KC_EXSEL:
         case KC_LCTRL ... KC_RGUI:
             return (action_t)ACTION_KEY(keycode);
             break;
         case KC_SYSTEM_POWER ... KC_SYSTEM_WAKE:
             return (action_t)ACTION_USAGE_SYSTEM(KEYCODE2SYSTEM(keycode));
             break;
-        case KC_AUDIO_MUTE ... KC_WWW_FAVORITES:
+        case KC_AUDIO_MUTE ... KC_BRIGHTNESS_DEC:
             return (action_t)ACTION_USAGE_CONSUMER(KEYCODE2CONSUMER(keycode));
             break;
         case KC_MS_UP ... KC_MS_ACCEL2:
             return (action_t)ACTION_MOUSEKEY(keycode);
-            break;*/
+            break;
         case KC_TRNS:
             return (action_t)ACTION_TRANSPARENT;
             break;
